@@ -4,7 +4,7 @@ let rawdata = fs.readFileSync('heroes.json');
 let heroes = JSON.parse(rawdata);
 function number(){
     while(true) {
-        var x = readlineSync.question();
+        let x = readlineSync.question();
         const parsed = Number.parseInt(x);
         if (Number.isNaN(parsed)) {
             console.log("Dana statystyka musi być liczba");
@@ -15,19 +15,20 @@ function number(){
 
 }
 function newHero() {
-    var name = readlineSync.question("Name : ");
+    let name = readlineSync.question("Name : ");
+    let nameSave = name.toLowerCase();
     console.log("Age : ");
-    var age = number();
+    let age = number();
     console.log("HP : ");
-    var hp = number();
+    let hp = number();
     console.log("AD : ");
-    var ad = number();
+    let ad = number();
     console.log("Armor : ");
-    var armor = number();
+    let armor = number();
     console.log("Mana : ");
-    var mana = number();
-    var myObj = {
-        [name]: {
+    let mana = number();
+    let myObj = {
+        [nameSave]: {
             'age': age,
             'stats': {
                 'hp': hp,
@@ -43,22 +44,21 @@ function newHero() {
     });
 }
 function check() {
-    var x = readlineSync.question('\nKtory bohater cie interesuje ?\n');
-    if (x == "exit") {
+    let k = readlineSync.question('\nKtory bohater cie interesuje ?\n');
+    let x=k.toLowerCase();
+    if (x === "exit") {
         return;
     } else if (x in heroes) {
         console.log(heroes[x]);
     } else {
-        var dodac = readlineSync.question("Dany bohater nie istnieje , czy chcesz go dodac do listy ?(tak\nie)\n");
-        if (dodac == "tak") {
+        let dodac = readlineSync.question("Dany bohater nie istnieje , czy chcesz go dodac do listy ?(tak\nie)\n");
+        if (dodac === "tak") {
             newHero();
         }
     }
-    var b = readlineSync.question('Czy chcesz ponownie wyszukac bohatera ?(tak/nie)\n');
-    if (b == "tak") {
+    let b = readlineSync.question('Czy chcesz ponownie wyszukac bohatera ?(tak/nie)\n');
+    if (b === "tak") {
         check();
-    } else {
-        return;
     }
 }
 check();
