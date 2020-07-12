@@ -1,6 +1,10 @@
 {
   "type": "module",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
   "dependencies": {
+    "mocha": "^8.0.1",
     "readline-sync": "^1.4.10"
   }
 }
