@@ -1,17 +1,13 @@
 import fs from 'fs';
 import readlineSync from 'readline-sync';
+import {capitalize} from './strings.js';
 
 let rawdata = fs.readFileSync('heroes.json');
 let heroes = JSON.parse(rawdata);
 
 function nameFormat() {
     let name = readlineSync.question("Name : ");
-    for (let i = 0; i < name.length; i++) {
-        if (i === 0 || name[i] === " " || name[i] === "'" || name[i] === "-") {
-            name[i] = name.charAt(i).toUpperCase()
-        }
-    }
-    return name;
+    return capitalize(name);
 }
 
 function number() {
