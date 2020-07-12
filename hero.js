@@ -60,11 +60,12 @@ function check() {
     let x = readlineSync.question('\nKtory bohater cie interesuje ?\n');
     if (x === "exit") {
         return;
-    } else if (x in heroes) {
+    }
+    if (x in heroes) {
         console.log(x);
         console.log(heroes[x]);
     } else {
-        let dodac = readlineSync.question("Dany bohater nie istnieje , czy chcesz go dodac do listy ?(tak\nie)\n");
+        let dodac = readlineSync.question("Dany bohater nie istnieje , czy chcesz go dodac do listy ?(tak/nie)\n");
         if (dodac === "tak") {
             newHero();
         }
