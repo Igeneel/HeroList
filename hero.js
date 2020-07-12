@@ -1,5 +1,6 @@
-const fs = require('fs');
-const readlineSync = require('readline-sync');
+import fs from 'fs';
+import readlineSync from 'readline-sync';
+
 let rawdata = fs.readFileSync('heroes.json');
 let heroes = JSON.parse(rawdata);
 
