@@ -2,21 +2,32 @@ const fs = require('fs');
 const readlineSync = require('readline-sync');
 let rawdata = fs.readFileSync('heroes.json');
 let heroes = JSON.parse(rawdata);
-function number(){
-    while(true) {
+
+function nameFormat() {
+    let name = readlineSync.question("Name : ");
+    for (let i = 0; i < name.length; i++) {
+        if (i === 0 || name[i] === " " || name[i] === "'" || name[i] === "-") {
+            name[i] = name.charAt(i).toUpperCase()
+        }
+    }
+    return name;
+}
+
+function number() {
+    while (true) {
         let x = readlineSync.question();
         const parsed = Number.parseInt(x);
         if (Number.isNaN(parsed)) {
             console.log("Dana statystyka musi być liczba");
-        }else{
-        return x;
+        } else {
+            return x;
         }
     }
 
 }
+
 function newHero() {
-    let name = readlineSync.question("Name : ");
-    let nameSave = name.toLowerCase();
+    let name = nameFormat();
     console.log("Age : ");
     let age = number();
     console.log("HP : ");
@@ -28,7 +39,7 @@ function newHero() {
     console.log("Mana : ");
     let mana = number();
     let myObj = {
-        [nameSave]: {
+        [name]: {
             'age': age,
             'stats': {
                 'hp': hp,
@@ -39,16 +50,17 @@ function newHero() {
         }
     }
     Object.assign(heroes, myObj);
-    fs.writeFile("heroes.json", JSON.stringify(heroes), function(err) {
+    fs.writeFile("heroes.json", JSON.stringify(heroes), function (err) {
         if (err) throw err;
     });
 }
+
 function check() {
-    let k = readlineSync.question('\nKtory bohater cie interesuje ?\n');
-    let x=k.toLowerCase();
+    let x = readlineSync.question('\nKtory bohater cie interesuje ?\n');
     if (x === "exit") {
         return;
     } else if (x in heroes) {
+        console.log(x);
         console.log(heroes[x]);
     } else {
         let dodac = readlineSync.question("Dany bohater nie istnieje , czy chcesz go dodac do listy ?(tak\nie)\n");
@@ -61,4 +73,5 @@ function check() {
         check();
     }
 }
+
 check();
